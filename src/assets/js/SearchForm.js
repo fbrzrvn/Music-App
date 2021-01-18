@@ -3,40 +3,15 @@ export function render() {
         "<section class='searchContainer__section'></section>"
     );
 
-    const selectTypeSearch = $("<select class='type'></select>");
-    $.each(addOptions(), function (index, item) {
-        selectTypeSearch.append(
-            $("<option>", {
-                value: item.value,
-                text: item.text,
-                selected: item.selected,
-            })
-        );
-    });
+    const selectTypeSearch = renderSelectTypeSearch();
 
-    const selectCountries = $("<select class='countries'></select>");
-    addCountries().then(function (json) {
-        $.each(json, function (index, item) {
-            selectCountries.append(
-                $("<option>", {
-                    value: item.a2,
-                    text: item.nameCurrentValue,
-                })
-            );
-        });
-    });
+    const selectCountries = renderSelectCountries();
 
-    const selectExplicit = $("<select class='explicit'></select>");
-    selectExplicit.append(new Option("Yes", true));
-    selectExplicit.append(new Option("No", false));
+    const selectExplicit = renderSelectExplicit();
 
-    const selectLimit = $("<select class='limit'></select>");
-    selectLimit.append(new Option("50", 50));
-    selectLimit.append(new Option("50", 100));
-    selectLimit.append(new Option("50", 150));
-    selectLimit.append(new Option("50", 200));
+    const selectLimit = renderSelectLimit();
 
-    const searchBar = $("<input type='text'></input>");
+    const searchBar = renderInputSearchBar();
 
     searchContainer.append(selectTypeSearch);
     searchContainer.append(selectCountries);
@@ -44,6 +19,78 @@ export function render() {
     searchContainer.append(selectLimit);
     searchContainer.append(searchBar);
     $("body").append(searchContainer);
+}
+
+function renderSelectTypeSearch() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let select = $("<select class='dropdown dropdownType__select'></select>");
+    $.each(addOptions(), function (index, item) {
+        select.append(
+            $("<option>", {
+                value: item.value,
+                text: item.text,
+                selected: item.selected,
+            })
+        );
+    });
+    div.append(label);
+    div.append(select);
+    return div;
+}
+
+function renderSelectCountries() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let select = $("<select class='dropdown'></select>");
+    addCountries().then(function (json) {
+        $.each(json, function (index, item) {
+            select.append(
+                $("<option>", {
+                    value: item.a2,
+                    text: item.nameCurrentValue,
+                })
+            );
+        });
+    });
+    div.append(label);
+    div.append(select);
+    return div;
+}
+
+function renderSelectExplicit() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let select = $("<select class='dropdown'></select>");
+    select.append(new Option("Yes", true));
+    select.append(new Option("No", false));
+    div.append(label);
+    div.append(select);
+    return div;
+}
+
+function renderSelectLimit() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let select = $("<select class='dropdown'></select>");
+    select.append(new Option("50", 50));
+    select.append(new Option("50", 100));
+    select.append(new Option("50", 150));
+    select.append(new Option("50", 200));
+    div.append(label);
+    div.append(select);
+    return div;
+}
+
+function renderInputSearchBar() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let searchBar = $(
+        "<input type='text' class='input searchBar__input'></input>"
+    );
+    div.append(label);
+    div.append(searchBar);
+    return div;
 }
 
 function addOptions() {
@@ -66,7 +113,7 @@ function addOptions() {
         {
             value: "musicVideo",
             text: "Music Videos",
-            selected: true,
+            selected: false,
         },
     ];
 }
