@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "388a9068-c45a-4b17-8fdb-17e74d26884f",
+		"name": "Music-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Artist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{itunesSearch}}eminem{{artist}}",
+					"host": [
+						"{{itunesSearch}}eminem{{artist}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Song ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{itunesSearch}}the+way+i+am{{song}}",
+					"host": [
+						"{{itunesSearch}}the+way+i+am{{song}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Album",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{itunesSearch}}kaya{{album}}",
+					"host": [
+						"{{itunesSearch}}kaya{{album}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Video",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{itunesSearch}}toxicity{{video}}",
+					"host": [
+						"{{itunesSearch}}toxicity{{video}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Country",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{itunesSearch}}jim+jones{{country}}ca",
+					"host": [
+						"{{itunesSearch}}jim+jones{{country}}ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Limit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{itunesSearch}}eminem{{song}}{{limit}}1",
+					"host": [
+						"{{itunesSearch}}eminem{{song}}{{limit}}1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Explicit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{itunesSearch}}eminem{{artist}}{{song}}{{explicit}}no",
+					"host": [
+						"{{itunesSearch}}eminem{{artist}}{{song}}{{explicit}}no"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "itunesSearch",
+			"value": "itunes.apple.com/search?term="
+		},
+		{
+			"key": "artist",
+			"value": "&entity=musicArtist"
+		},
+		{
+			"key": "song",
+			"value": "&entity=song"
+		},
+		{
+			"key": "album",
+			"value": "&entity=album"
+		},
+		{
+			"key": "video",
+			"value": "&entity=musicVideo"
+		},
+		{
+			"key": "country",
+			"value": "&country="
+		},
+		{
+			"key": "explicit",
+			"value": "&explicit="
+		},
+		{
+			"key": "limit",
+			"value": "&limit="
+		}
+	]
+}
