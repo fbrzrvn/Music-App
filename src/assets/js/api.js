@@ -4,6 +4,10 @@ const getData = data => {
 
   const searchQuery = data.searchQuery.split(" ").join("+");
 
+  const errorMsg = 'Please type something to search';
+  const errorSmall = 'Please try again';
+  if (!searchQuery) renderToastError(errorMsg, errorSmall);
+
   switch(data.type) {
     case "musicArtist":
       url += `${searchQuery}&entity=musicArtist`;
@@ -97,27 +101,31 @@ const getData = data => {
       })
     }
 
-    if (allData.length === 0) {
-      const toastContainer = $('<div class="toast__container"></div>');
-      const toastP = $('<p class="toast__p"></p>').text("OPS! The search you typed did not match any result!");
-      const toastSmall = $('<small class="toast__small"></small>').text('Please try again with a new search.');
-      toastContainer.append(toastP, toastSmall);
-      toastContainer.fadeOut(2000);
-      $('body').append(toastContainer);
+    if (allData.length === 0 && searchQuery) {
+      const errorTitle = 'OPS! The search you typed did not match any result!';
+      const errorSubtitle = 'Please try again with a new search.'
+      renderToastError(errorTitle, errorSubtitle);
     }
     console.log(allData);
     return allData;
 
   }).fail(function(xhr) {
-    const toastContainer = $('<div class="toast__container"></div>');
-    const toastP = $('<p class="toast__p"></p>').text("iTunes is not available for this country.");
-    const toastSmall = $('<small class="toast__small"></small>').text('Please choose another country.');
-    toastContainer.append(toastP, toastSmall);
-    toastContainer.fadeOut(2000);
-    $('body').append(toastContainer);
+    const errorTitle = 'iTunes is not available for this country.';
+    const errorSubtitle = 'Please choose another country.';
+    renderToastError(errorTitle, errorSubtitle);
     console.log(xhr.responseText);
   })
 
+}
+
+
+function renderToastError(title, subtitle) {
+  const toastContainer = $('<div class="toast__container"></div>');
+  const toastP = $('<p class="toast__p"></p>').text(title);
+  const toastSmall = $('<small class="toast__small"></small>').text(subtitle);
+  toastContainer.append(toastP, toastSmall);
+  toastContainer.fadeOut(2000);
+  $('body').append(toastContainer);
 }
 
 
