@@ -1,11 +1,40 @@
+let searchState = {
+    type: "song",
+    country: "US",
+    explicit: "",
+    limit: "",
+    searchQuery: "",
+};
+
 export function render() {
     const searchContainer = $(
         "<section class='searchContainer__section'></section>"
     );
 
-    const selectTypeSearch = $("<select class='type'></select>");
+    const TypeSearch = renderTypeSearch();
+
+    const Countries = renderCountries();
+
+    const Explicit = renderExplicit();
+
+    const Limit = renderLimit();
+
+    const searchBar = renderSearchBar();
+
+    searchContainer.append(TypeSearch);
+    searchContainer.append(Countries);
+    searchContainer.append(Explicit);
+    searchContainer.append(Limit);
+    searchContainer.append(searchBar);
+    $("body").append(searchContainer);
+}
+
+function renderTypeSearch() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let select = $("<select class='dropdown dropdownType__select'></select>");
     $.each(addOptions(), function (index, item) {
-        selectTypeSearch.append(
+        select.append(
             $("<option>", {
                 value: item.value,
                 text: item.text,
@@ -13,11 +42,22 @@ export function render() {
             })
         );
     });
+    select.on("change", function (e) {
+        searchState.type = this.value;
+        //llamar a la api
+    });
+    div.append(label);
+    div.append(select);
+    return div;
+}
 
-    const selectCountries = $("<select class='countries'></select>");
+function renderCountries() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let select = $("<select class='dropdown'></select>");
     addCountries().then(function (json) {
         $.each(json, function (index, item) {
-            selectCountries.append(
+            select.append(
                 $("<option>", {
                     value: item.a2,
                     text: item.nameCurrentValue,
@@ -25,25 +65,62 @@ export function render() {
             );
         });
     });
+    select.val("US");
+    select.on("change", function (e) {
+        searchState.country = this.value;
+        //llamar a la api
+    });
+    div.append(label);
+    div.append(select);
+    return div;
+}
 
-    const selectExplicit = $("<select class='explicit'></select>");
-    selectExplicit.append(new Option("Yes", true));
-    selectExplicit.append(new Option("No", false));
+function renderExplicit() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let select = $("<select class='dropdown'></select>");
+    select.append(new Option("Yes", "Yes"));
+    select.append(new Option("No", "No"));
+    select.on("change", function (e) {
+        searchState.explicit = this.value;
+        //llamar a la api
+    });
+    div.append(label);
+    div.append(select);
+    return div;
+}
 
-    const selectLimit = $("<select class='limit'></select>");
-    selectLimit.append(new Option("50", 50));
-    selectLimit.append(new Option("50", 100));
-    selectLimit.append(new Option("50", 150));
-    selectLimit.append(new Option("50", 200));
+function renderLimit() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let select = $("<select class='dropdown'></select>");
+    select.append(new Option("50", "50"));
+    select.append(new Option("100", "100"));
+    select.append(new Option("150", "150"));
+    select.append(new Option("200", "200"));
+    select.on("change", function (e) {
+        searchState.limit = this.value;
+        //llamar a la api
+    });
+    div.append(label);
+    div.append(select);
+    return div;
+}
 
-    const searchBar = $("<input type='text'></input>");
-
-    searchContainer.append(selectTypeSearch);
-    searchContainer.append(selectCountries);
-    searchContainer.append(selectExplicit);
-    searchContainer.append(selectLimit);
-    searchContainer.append(searchBar);
-    $("body").append(searchContainer);
+function renderSearchBar() {
+    let div = $("<div class='formSection__div '>");
+    let label = $("<label>").text("Select Type of Search:");
+    let searchBar = $(
+        "<input type='text' class='input searchBar__input'></input>"
+    );
+    searchBar.on("blur", function (e) {
+        searchState.searchQuery = this.value;
+        console.log(searchState);
+        //llamar a la api
+    });
+    div.append(label);
+    div.append(searchBar);
+    return div;
 }
 
 function addOptions() {
@@ -66,7 +143,7 @@ function addOptions() {
         {
             value: "musicVideo",
             text: "Music Videos",
-            selected: true,
+            selected: false,
         },
     ];
 }

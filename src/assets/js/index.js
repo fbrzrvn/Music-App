@@ -1,5 +1,6 @@
 import { render as renderForm } from "./SearchForm.js";
 import { getData } from './api.js';
+import "../css/style.css";
 
 renderForm();
 
