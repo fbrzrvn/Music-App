@@ -95,14 +95,22 @@ const getData = data => {
     }
     if (allData.length === 0) {
       const toastContainer = $('<div class="toast__container"></div>');
-      const toastP = $('<p class="toast__p"></p>').text("OPS! Something went wrong!");
-      const toastSmall = $('<small class="toast__small"></small>').text('Please Try Again');
+      const toastP = $('<p class="toast__p"></p>').text("OPS! The search you typed did not match any result!");
+      const toastSmall = $('<small class="toast__small"></small>').text('Please try again with a new search.');
       toastContainer.append(toastP, toastSmall);
       toastContainer.fadeOut(2000);
       $('body').append(toastContainer);
     }
     console.log(allData);
     return allData;
+  }).fail(function(xhr) {
+    const toastContainer = $('<div class="toast__container"></div>');
+    const toastP = $('<p class="toast__p"></p>').text("iTunes is not available for this country.");
+    const toastSmall = $('<small class="toast__small"></small>').text('Please choose another country.');
+    toastContainer.append(toastP, toastSmall);
+    toastContainer.fadeOut(2000);
+    $('body').append(toastContainer);
+    console.log(xhr.responseText);
   })
 
 }
