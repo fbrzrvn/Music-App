@@ -1,27 +1,35 @@
+let searchState = {
+    type: "song",
+    country: "US",
+    explicit: "",
+    limit: "",
+    searchQuery: "",
+};
+
 export function render() {
     const searchContainer = $(
         "<section class='searchContainer__section'></section>"
     );
 
-    const selectTypeSearch = renderSelectTypeSearch();
+    const TypeSearch = renderTypeSearch();
 
-    const selectCountries = renderSelectCountries();
+    const Countries = renderCountries();
 
-    const selectExplicit = renderSelectExplicit();
+    const Explicit = renderExplicit();
 
-    const selectLimit = renderSelectLimit();
+    const Limit = renderLimit();
 
-    const searchBar = renderInputSearchBar();
+    const searchBar = renderSearchBar();
 
-    searchContainer.append(selectTypeSearch);
-    searchContainer.append(selectCountries);
-    searchContainer.append(selectExplicit);
-    searchContainer.append(selectLimit);
+    searchContainer.append(TypeSearch);
+    searchContainer.append(Countries);
+    searchContainer.append(Explicit);
+    searchContainer.append(Limit);
     searchContainer.append(searchBar);
     $("body").append(searchContainer);
 }
 
-function renderSelectTypeSearch() {
+function renderTypeSearch() {
     let div = $("<div class='formSection__div '>");
     let label = $("<label>").text("Select Type of Search:");
     let select = $("<select class='dropdown dropdownType__select'></select>");
@@ -34,12 +42,16 @@ function renderSelectTypeSearch() {
             })
         );
     });
+    select.on("change", function (e) {
+        searchState.type = this.value;
+        //llamar a la api
+    });
     div.append(label);
     div.append(select);
     return div;
 }
 
-function renderSelectCountries() {
+function renderCountries() {
     let div = $("<div class='formSection__div '>");
     let label = $("<label>").text("Select Type of Search:");
     let select = $("<select class='dropdown'></select>");
@@ -53,41 +65,59 @@ function renderSelectCountries() {
             );
         });
     });
+    select.val("US");
+    select.on("change", function (e) {
+        searchState.country = this.value;
+        //llamar a la api
+    });
     div.append(label);
     div.append(select);
     return div;
 }
 
-function renderSelectExplicit() {
+function renderExplicit() {
     let div = $("<div class='formSection__div '>");
     let label = $("<label>").text("Select Type of Search:");
     let select = $("<select class='dropdown'></select>");
-    select.append(new Option("Yes", true));
-    select.append(new Option("No", false));
+    select.append(new Option("Yes", "Yes"));
+    select.append(new Option("No", "No"));
+    select.on("change", function (e) {
+        searchState.explicit = this.value;
+        //llamar a la api
+    });
     div.append(label);
     div.append(select);
     return div;
 }
 
-function renderSelectLimit() {
+function renderLimit() {
     let div = $("<div class='formSection__div '>");
     let label = $("<label>").text("Select Type of Search:");
     let select = $("<select class='dropdown'></select>");
-    select.append(new Option("50", 50));
-    select.append(new Option("50", 100));
-    select.append(new Option("50", 150));
-    select.append(new Option("50", 200));
+    select.append(new Option("50", "50"));
+    select.append(new Option("100", "100"));
+    select.append(new Option("150", "150"));
+    select.append(new Option("200", "200"));
+    select.on("change", function (e) {
+        searchState.limit = this.value;
+        //llamar a la api
+    });
     div.append(label);
     div.append(select);
     return div;
 }
 
-function renderInputSearchBar() {
+function renderSearchBar() {
     let div = $("<div class='formSection__div '>");
     let label = $("<label>").text("Select Type of Search:");
     let searchBar = $(
         "<input type='text' class='input searchBar__input'></input>"
     );
+    searchBar.on("blur", function (e) {
+        searchState.searchQuery = this.value;
+        console.log(searchState);
+        //llamar a la api
+    });
     div.append(label);
     div.append(searchBar);
     return div;
