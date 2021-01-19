@@ -1,3 +1,5 @@
+import { getData } from "./api.js";
+
 let searchState = {
     type: "song",
     country: "US",
@@ -44,7 +46,7 @@ function renderTypeSearch() {
     });
     select.on("change", function (e) {
         searchState.type = this.value;
-        //llamar a la api
+        getData(searchState);
     });
     div.append(label);
     div.append(select);
@@ -55,20 +57,24 @@ function renderCountries() {
     let div = $("<div class='formSection__div '>");
     let label = $("<label>").text("Select Type of Search:");
     let select = $("<select class='dropdown'></select>");
-    addCountries().then(function (json) {
-        $.each(json, function (index, item) {
-            select.append(
-                $("<option>", {
-                    value: item.a2,
-                    text: item.nameCurrentValue,
-                })
-            );
+    addCountries()
+        .then(function (json) {
+            $.each(json, function (index, item) {
+                select.append(
+                    $("<option>", {
+                        value: item.a2,
+                        text: item.nameCurrentValue,
+                    })
+                );
+            });
+        })
+        .then(function () {
+            select.val("US");
         });
-    });
-    select.val("US");
+
     select.on("change", function (e) {
         searchState.country = this.value;
-        //llamar a la api
+        getData(searchState);
     });
     div.append(label);
     div.append(select);
@@ -83,7 +89,7 @@ function renderExplicit() {
     select.append(new Option("No", "No"));
     select.on("change", function (e) {
         searchState.explicit = this.value;
-        //llamar a la api
+        getData(searchState);
     });
     div.append(label);
     div.append(select);
@@ -100,7 +106,7 @@ function renderLimit() {
     select.append(new Option("200", "200"));
     select.on("change", function (e) {
         searchState.limit = this.value;
-        //llamar a la api
+        getData(searchState);
     });
     div.append(label);
     div.append(select);
@@ -115,8 +121,7 @@ function renderSearchBar() {
     );
     searchBar.on("blur", function (e) {
         searchState.searchQuery = this.value;
-        console.log(searchState);
-        //llamar a la api
+        getData(searchState);
     });
     div.append(label);
     div.append(searchBar);
