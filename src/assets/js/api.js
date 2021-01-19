@@ -29,13 +29,14 @@ const getData = data => {
 
   const settings = {
     url: url,
-    dataType: "jsonp",
+    contentType: "json",
     method: "GET",
     success: function(result) {
+      let dataJson = JSON.parse(result);
       let data;
       let allData = [];
       if (url.includes('song')) {
-        result.results.forEach(result => {
+        dataJson.results.forEach(result => {
           data = {
             cover: result.artworkUrl100,
             song: result.trackName,
@@ -51,7 +52,7 @@ const getData = data => {
           allData.push(data);
         })
       } else if (url.includes('album')) {
-        result.results.forEach(result => {
+        dataJson.results.forEach(result => {
           data = {
             cover: result.artworkUrl100,
             artist: result.artistName,
@@ -64,7 +65,7 @@ const getData = data => {
           allData.push(data);
         })
       } else if (url.includes('musicArtist')) {
-        result.results.forEach(result => {
+        dataJson.results.forEach(result => {
           let allData = [];
           data = {
             artist: result.artistName,
@@ -76,7 +77,7 @@ const getData = data => {
         })
         console.log(result.results);
       } else if (url.includes('musicVideo')) {
-        result.results.forEach(result => {
+        dataJson.results.forEach(result => {
           data = {
             cover: result.artworkUrl100,
             song: result.trackName,
