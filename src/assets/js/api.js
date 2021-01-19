@@ -5,7 +5,7 @@ const getData = data => {
   const searchQuery = data.searchQuery.split(" ").join("+");
 
   switch(data.type) {
-    case "artist":
+    case "musicArtist":
       url += `${searchQuery}&entity=musicArtist`;
       break;
     case "album":
@@ -14,7 +14,7 @@ const getData = data => {
     case "song":
       url += `${searchQuery}&entity=song`;
       break;
-    case "video":
+    case "musicVideo":
       url += `${searchQuery}&entity=musicVideo`;
       break;
   }
@@ -32,10 +32,12 @@ const getData = data => {
     contentType: "json",
     method: "GET"
   }
+
   $.ajax(settings).done(function(result) {
     let dataJson = JSON.parse(result);
     let data;
     let allData = [];
+
     if (url.includes('song')) {
       dataJson.results.forEach(result => {
         data = {
@@ -52,6 +54,7 @@ const getData = data => {
         }
         allData.push(data);
       })
+
     } else if (url.includes('album')) {
       dataJson.results.forEach(result => {
         data = {
@@ -65,9 +68,9 @@ const getData = data => {
         }
         allData.push(data);
       })
+
     } else if (url.includes('musicArtist')) {
       dataJson.results.forEach(result => {
-        let allData = [];
         data = {
           artist: result.artistName,
           genre: result.primaryGenreName,
@@ -75,7 +78,7 @@ const getData = data => {
         }
         allData.push(data);
       })
-      console.log(result.results);
+
     } else if (url.includes('musicVideo')) {
       dataJson.results.forEach(result => {
         data = {
@@ -93,6 +96,7 @@ const getData = data => {
         allData.push(data);
       })
     }
+
     if (allData.length === 0) {
       const toastContainer = $('<div class="toast__container"></div>');
       const toastP = $('<p class="toast__p"></p>').text("OPS! The search you typed did not match any result!");
@@ -103,6 +107,7 @@ const getData = data => {
     }
     console.log(allData);
     return allData;
+
   }).fail(function(xhr) {
     const toastContainer = $('<div class="toast__container"></div>');
     const toastP = $('<p class="toast__p"></p>').text("iTunes is not available for this country.");
