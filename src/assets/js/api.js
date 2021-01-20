@@ -124,7 +124,7 @@ function renderToastError(title, subtitle) {
   const toastP = $('<p class="toast__p"></p>').text(title);
   const toastSmall = $('<small class="toast__small"></small>').text(subtitle);
   toastContainer.append(toastP, toastSmall);
-  toastContainer.fadeOut(2000);
+  toastContainer.fadeOut(5000);
   $('body').append(toastContainer);
 }
 
