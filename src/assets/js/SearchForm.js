@@ -14,13 +14,9 @@ export function render() {
     );
 
     const TypeSearch = renderTypeSearch();
-
     const Countries = renderCountries();
-
     const Explicit = renderExplicit();
-
     const Limit = renderLimit();
-
     const searchBar = renderSearchBar();
 
     searchContainer.append(TypeSearch);

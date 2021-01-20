@@ -8,7 +8,8 @@
 
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: #1f1f1f;
 }
 
@@ -62,7 +63,7 @@ label {
     min-width: fit-content;
     height: 20vh;
     border-radius: 10px;
-    box-shadow: 1px 0 3px rgba(250,250,250,.7);
+    box-shadow: 1px 0 3px rgba(250, 250, 250, 0.7);
 }
 
 .toast__p {
@@ -77,4 +78,36 @@ label {
 .toast__small {
     color: #fff;
     font-size: 1rem;
+}
+
+.mainContainer__main {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 95vw;
+}
+
+.card {
+    width: 500px;
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.songName__p {
+    background-color: rgba(255, 255, 255, 0.4);
+    font-size: 18px;
+}
+
+.infoContainer__div {
+    align-self: end;
+    background-color: rgba(255, 255, 255, 0.4);
+    font-size: 18px;
+}
+
+audio {
+    height: 60px;
 }
