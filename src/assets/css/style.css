@@ -81,6 +81,7 @@ label {
 }
 
 .mainContainer__main {
+    margin-top: 2em;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -109,5 +110,5 @@ label {
 }
 
 audio {
-    height: 60px;
+    height: 50px;
 }
