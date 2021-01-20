@@ -119,12 +119,13 @@ const getData = (data) => {
 };
 
 function renderToastError(title, subtitle) {
-    const toastContainer = $('<div class="toast__container"></div>');
-    const toastP = $('<p class="toast__p"></p>').text(title);
-    const toastSmall = $('<small class="toast__small"></small>').text(subtitle);
-    toastContainer.append(toastP, toastSmall);
-    toastContainer.fadeOut(2000);
-    $("body").append(toastContainer);
+
+  const toastContainer = $('<div class="toast__container"></div>');
+  const toastP = $('<p class="toast__p"></p>').text(title);
+  const toastSmall = $('<small class="toast__small"></small>').text(subtitle);
+  toastContainer.append(toastP, toastSmall);
+  toastContainer.fadeOut(5000);
+  $('body').append(toastContainer);
 }
 
 export { getData };
