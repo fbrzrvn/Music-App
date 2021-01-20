@@ -43,6 +43,7 @@ const getData = (data) => {
             let dataJson = JSON.parse(result);
             let apiData;
             let allData = [];
+            let id = 1;
 
             if (url.includes("song")) {
                 dataJson.results.forEach((result) => {
@@ -57,6 +58,7 @@ const getData = (data) => {
                         genre: result.primaryGenreName,
                         url: result.trackViewUrl,
                         preview: result.previewUrl,
+                        id: result.trackId
                     };
                     allData.push(apiData);
                 });
@@ -70,6 +72,7 @@ const getData = (data) => {
                         tracksCount: result.tracksCount,
                         release: result.releaseDate,
                         genre: result.primaryGenreName,
+                        id: result.collectionId
                     };
                     allData.push(apiData);
                 });
@@ -79,6 +82,7 @@ const getData = (data) => {
                         artist: result.artistName,
                         genre: result.primaryGenreName,
                         url: result.artistLinkUrl,
+                        id: result.artistId
                     };
                     allData.push(apiData);
                 });
@@ -95,6 +99,7 @@ const getData = (data) => {
                         genre: result.primaryGenreName,
                         url: result.trackViewUrl,
                         preview: result.previewUrl,
+                        id: id++
                     };
                     allData.push(apiData);
                 });
