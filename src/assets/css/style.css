@@ -2,113 +2,199 @@
 @import url("./_variables.css");
 
 * {
-    box-sizing: border-box;
-    font-size: 24px;
+   box-sizing: border-box;
+   font-size: 24px;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #1f1f1f;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background-color: #1f1f1f;
+   max-width: 100vw;
 }
 
 label {
-    color: white;
-    font-size: 24px;
+   color: white;
+   font-size: 24px;
+}
+
+a {
+   text-decoration: none;
+   color: #49008d;
+   transition: color .2 ease-in-out;
+}
+
+a:hover {
+   color: #823ec4;
 }
 
 .searchContainer__section {
-    margin-top: 10vh;
-    padding: 2em;
-    width: 95vw;
-    background-color: #49008d;
-    min-height: max-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    row-gap: 10px;
+   margin: 10vh auto 0;
+   padding: 2em;
+   width: 95vw;
+   background-color: #49008d;
+   min-height: max-content;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   border-radius: 10px;
+   row-gap: 10px;
 }
 
 .formSection__div {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   row-gap: 10px;
 }
 
 .dropdown {
-    border: none;
-    width: 100%;
-    height: 50px;
+   border: none;
+   width: 100%;
+   height: 50px;
+   padding: 0 5px;
 }
 
 .input {
-    width: 100%;
-    height: 50px;
-    border: none;
+   width: 100%;
+   height: 50px;
+   border: none;
+   padding: 0 5px;
 }
 
 .toast__container {
-    background: #1f1f1f;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: fit-content;
-    height: 20vh;
-    border-radius: 10px;
-    box-shadow: 1px 0 3px rgba(250, 250, 250, 0.7);
+   background: #1f1f1f;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   min-width: fit-content;
+   height: 20vh;
+   border-radius: 10px;
+   box-shadow: 1px 0 3px rgba(250, 250, 250, 0.7);
 }
 
 .toast__p {
-    color: #fff;
-    font-size: 1.5rem;
-    padding: 0 10px;
-    margin-bottom: 5px;
-    white-space: wrap;
-    text-align: center;
+   color: #fff;
+   font-size: 1.5rem;
+   padding: 0 10px;
+   margin-bottom: 5px;
+   white-space: wrap;
+   text-align: center;
 }
 
 .toast__small {
-    color: #fff;
-    font-size: 1rem;
+   color: #fff;
+   font-size: 1rem;
 }
 
 .mainContainer__main {
-    margin-top: 2em;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 95vw;
+   display: flex;
+   width: 95vw;
+   margin: 30px auto;
+}
+
+.wrapper {
+   flex: .7;
+   display: grid;
+   gap: 10px;
+   grid-template-columns: repeat( auto-fit, minmax(300px, 1fr));
 }
 
 .card {
-    width: 500px;
-    height: 500px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: grid;
-    grid-template-columns: 1fr;
+   width: 300px;
+   height: 300px;
+   background-repeat: no-repeat;
+   background-size: cover;
+   display: grid;
+   grid-template-columns: 1fr;
 }
 
 .songName__p {
-    background-color: rgba(255, 255, 255, 0.4);
-    font-size: 18px;
+   background-color: rgba(255, 255, 255, 0.4);
+   font-size: 18px;
+   padding: 5px;
 }
 
 .infoContainer__div {
-    align-self: end;
-    background-color: rgba(255, 255, 255, 0.4);
-    font-size: 18px;
+   align-self: end;
+   background-color: rgba(255, 255, 255, 0.4);
+   font-size: 18px;
+   padding: 5px;
 }
 
 audio {
-    height: 50px;
+    height: 60px;
+}
+
+ video {
+     width: 250px;
+}
+
+.card__footer {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 5px;
+}
+
+.favorite__container {
+   flex: .3;
+   background: linear-gradient(180deg, #49008d 0%, #823ec4 100%);
+   color: #fff;
+   box-shadow: 1px 0 3px rgba(250,250,250,.7);
+   border-radius: 10px;
+   padding: 20px;
+   margin-left: 20px;
+   height: max-content;
+}
+
+.favorite__header {
+   font-size: 1.5rem;
+   font-weight: 700;
+   text-transform: uppercase;
+}
+
+.favorite__card {
+   margin: 20px 0;
+   display: flex;
+   flex-direction: column;
+}
+
+.favorite__title {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.artist {
+   text-transform: capitalize;
+   font-weight: 700;
+   margin-bottom: 5px;
+}
+
+.song,
+.album {
+   font-size: 16px;
+   margin: 5px 0;
+}
+
+.favorite__icon {
+   cursor: pointer;
+   color: red;
+}
+
+
+@media screen and (max-width: 678px) {
+    .mainContainer__main {
+        flex-direction: column;
+    }
+    .wrapper {
+        margin-bottom: 40px;
+    }
 }

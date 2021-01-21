@@ -1,6 +1,8 @@
 import { update } from "./mainFrame.js";
 
 const getData = (data) => {
+    localStorage.removeItem('currentSearch');
+
     let url = "https://itunes.apple.com/search?term=";
 
     const searchQuery = data.searchQuery.split(" ").join("+");
@@ -69,7 +71,7 @@ const getData = (data) => {
                         artist: result.artistName,
                         album: result.collectionName,
                         albumPrice: result.collectionPrice,
-                        tracksCount: result.tracksCount,
+                        trackCount: result.trackCount,
                         release: result.releaseDate,
                         genre: result.primaryGenreName,
                         id: result.collectionId
@@ -111,9 +113,8 @@ const getData = (data) => {
                 const errorSubtitle = "Please try again with a new search.";
                 renderToastError(errorTitle, errorSubtitle);
             }
-            //console.log(allData);
             update(allData, data.type);
-            return allData;
+            return localStorage.setItem('currentSearch', JSON.stringify(allData));
         })
         .fail(function (xhr) {
             const errorTitle = "iTunes is not available for this country.";
