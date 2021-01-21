@@ -1,6 +1,8 @@
 import { update } from "./mainFrame.js";
 
 const getData = (data) => {
+    localStorage.removeItem('currentSearch');
+
     let url = "https://itunes.apple.com/search?term=";
 
     const searchQuery = data.searchQuery.split(" ").join("+");
@@ -43,6 +45,7 @@ const getData = (data) => {
             let dataJson = JSON.parse(result);
             let apiData;
             let allData = [];
+            let id = 1;
 
             if (url.includes("song")) {
                 dataJson.results.forEach((result) => {
@@ -57,6 +60,7 @@ const getData = (data) => {
                         genre: result.primaryGenreName,
                         url: result.trackViewUrl,
                         preview: result.previewUrl,
+                        id: result.trackId
                     };
                     allData.push(apiData);
                 });
@@ -67,9 +71,10 @@ const getData = (data) => {
                         artist: result.artistName,
                         album: result.collectionName,
                         albumPrice: result.collectionPrice,
-                        tracksCount: result.tracksCount,
+                        trackCount: result.trackCount,
                         release: result.releaseDate,
                         genre: result.primaryGenreName,
+                        id: result.collectionId
                     };
                     allData.push(apiData);
                 });
@@ -79,6 +84,7 @@ const getData = (data) => {
                         artist: result.artistName,
                         genre: result.primaryGenreName,
                         url: result.artistLinkUrl,
+                        id: result.artistId
                     };
                     allData.push(apiData);
                 });
@@ -95,6 +101,7 @@ const getData = (data) => {
                         genre: result.primaryGenreName,
                         url: result.trackViewUrl,
                         preview: result.previewUrl,
+                        id: id++
                     };
                     allData.push(apiData);
                 });
@@ -106,9 +113,8 @@ const getData = (data) => {
                 const errorSubtitle = "Please try again with a new search.";
                 renderToastError(errorTitle, errorSubtitle);
             }
-            //console.log(allData);
             update(allData, data.type);
-            return allData;
+            return localStorage.setItem('currentSearch', JSON.stringify(allData));
         })
         .fail(function (xhr) {
             const errorTitle = "iTunes is not available for this country.";
