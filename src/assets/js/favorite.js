@@ -3,7 +3,7 @@ const currentSearch = JSON.parse(localStorage.getItem('currentSearch'));
 
 const createFavoriteContainer = () => {
   const favoriteSection = $('<div class="favorite__container"></div>');
-  const favoriteHeader = $('<h2 class="favorite__header"></h2>').text('Favorite');
+  const favoriteHeader = $('<h2 class="favorite__header"></h2>').text('My Favorite');
   favoriteSection.append(favoriteHeader);
   $('.mainContainer__main').append(favoriteSection);
   $('.favorite__container').on('click', removeFavorite);
@@ -45,7 +45,6 @@ const removeFavorite = e => {
     if (index > -1) {
       favoriteList.splice(index, 1);
     }
-    // favoriteList = favoriteList.filter(item => item.id !== e.target.parentNode.parentNode.id);
     save();
   }
 }

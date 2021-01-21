@@ -10,8 +10,6 @@ export function render() {
 }
 
 export function update(dataSource, type) {
-    console.log(dataSource);
-    console.log(type);
     $(".wrapper").empty();
     for (let data of dataSource) {
         let card = $("<div class='card'></div>");
